@@ -1,1 +1,1 @@
-# GWAScFDR
+# GWAS_cFDR

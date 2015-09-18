@@ -1,0 +1,5 @@
+export(cFDR)
+export(GenomicControl)
+export(stratifiedQQplot)
+export(stratifiedTDRplot)
+export(stratifiedQQForGenomeControlplot)
