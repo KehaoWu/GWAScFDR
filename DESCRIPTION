@@ -6,6 +6,8 @@ Authors@R: c(person("Kehao Wu", "Developer", role = c("aut", "cre"),
   	     email = "Joe.Developer@some.domain.net"))
 Author: Kehao WU [aut, cre]
 Maintainer: Kehao Wu <kehao.wu@gmail.com>
+Depends:ggplot2
+Imports:ggplot2
 Description: conditional False Discovery Rate method to detect pleitropical SNPs using GWAS summary information
 License: MIT
 URL: https://github.com/KehaoWu/GWAS_cFDR
