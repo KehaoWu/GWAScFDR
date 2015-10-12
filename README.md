@@ -12,7 +12,7 @@ devtools::install_github("KehaoWu/GWAScFDR")
 ```R
 p1 = runif(10000,0,7)
 p2 = runif(10000,0,7)
-cFDR(1,p1,p2)   #Compute the 1st cFDR
+cFDR(p1,p2)   #Compute the 1st cFDR
 p = stratifiedQQForGenomeControlplot(p1)
 plot(p)
 p = stratifiedQQplot(p1,p2)

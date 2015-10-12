@@ -1,15 +1,23 @@
-cFDR = function(i,p1,p2){
+cFDR = function(p_i,p_j) {
 
-  if(length(p1)!=length(p2))
-    return(0)
+  # Compute empirical FDR at remaining points
   
-  N = length(p1)
-  cat(i,"/",N,"\n")
-  pset = p1[p2<=p2[i]]
-  index = match(p1[i],pset)
-  r = order(order(pset))
-  res = p1[i] / (r[index] / N)
-  return(res)
+  cdf = rep(0,length(p_i))
+  
+  oj = order(p_j)
+  p_i1 = p_i[oj]; p_j1 = p_j[oj] #
+  or = order(oj) # index of snps in R in p_i1/p_j1
+
+  pb = txtProgressBar(min = 1,max = length(p1),style=3)
+  for (i in 1:length(p1)) {
+    cdf[i] = length(which(p_i1[1:or[i]]<=p_i1[or[i]]))/or[i]
+    setTxtProgressBar(pb = pb,value = i)
+  }
+  
+  
+  f_i=p1/cdf
+  
+  return(f_i)
 }
 
 GenomicControl = function(p){
