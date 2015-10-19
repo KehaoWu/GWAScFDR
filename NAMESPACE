@@ -1,3 +1,4 @@
-export(manhattanPlot)
-
-import(ggplot2)
+export(stratifiedQQplot)
+export(stratifiedTDRplot)
+export(stratifiedQQForGenomeControlplot)
+import(ggplot2) 
