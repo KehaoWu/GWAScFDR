@@ -11,3 +11,4 @@ vignettes/*.pdf
 .Rproj.user
 GWAScFDR.Rproj
 .RData
+tmp.RData

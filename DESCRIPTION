@@ -1,13 +1,13 @@
-Package: GWAScFDR
+Package: Rmanhattanplot
 Version: 0.1
-Date: 2015-09-17
-Title: conditional False Discovery Rate method to detect pleitropical SNPs using GWAS summary information
+Date: 2015-10-12
+Title: We provide codes to plot manhattan plot which is commonly used to display p values from GWAS.
 Authors@R: c(person("Kehao Wu", "Developer", role = c("aut", "cre"),
-  	     email = "Joe.Developer@some.domain.net"))
+  	     email = "kehao.wu@gmail.com"))
 Author: Kehao WU [aut, cre]
 Maintainer: Kehao Wu <kehao.wu@gmail.com>
 Imports:ggplot2
-Description: conditional False Discovery Rate method to detect pleitropical SNPs using GWAS summary information
+Description: We provide codes to plot manhattan plot which is commonly used to display p values from GWAS.
 License: MIT
-URL: https://github.com/KehaoWu/GWAS_cFDR
-BugReports: https://github.com/KehaoWu/GWAS_cFDR/issues
+URL: https://github.com/KehaoWu/Rmanhattanplot
+BugReports: https://github.com/KehaoWu/Rmanhattanplot/issues

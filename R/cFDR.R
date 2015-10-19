@@ -8,7 +8,7 @@ cFDR = function(p_i,p_j) {
   p_i1 = p_i[oj]; p_j1 = p_j[oj] #
   or = order(oj) # index of snps in R in p_i1/p_j1
 
-  pb = txtProgressBar(min = 1,max = length(p1),style=3)
+  pb = txtProgressBar(min = 1,max = length(p_i1),style=3)
   for (i in 1:length(p1)) {
     cdf[i] = length(which(p_i1[1:or[i]]<=p_i1[or[i]]))/or[i]
     setTxtProgressBar(pb = pb,value = i)
