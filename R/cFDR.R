@@ -9,13 +9,13 @@ cFDR = function(p_i,p_j) {
   or = order(oj) # index of snps in R in p_i1/p_j1
 
   pb = txtProgressBar(min = 1,max = length(p_i1),style=3)
-  for (i in 1:length(p1)) {
+  for (i in 1:length(p_i1)) {
     cdf[i] = length(which(p_i1[1:or[i]]<=p_i1[or[i]]))/or[i]
     setTxtProgressBar(pb = pb,value = i)
   }
   
   
-  f_i=p1/cdf
+  f_i=p_i1/cdf
   
   return(f_i)
 }
