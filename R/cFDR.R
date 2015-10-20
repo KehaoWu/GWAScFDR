@@ -36,7 +36,7 @@ cFDR = function(p1,p2) {
   p_i1 = p_i[oj]; p_j1 = p_j[oj] #
   or = order(oj)[r] # index of snps in R in p_i1/p_j1
   cr = rep(0,length(r))
-  pb = txtProgressBar(min = 0,max = length(r))
+  pb = txtProgressBar(min = 0,max = length(r),style = 3)
   
   for (i in 1:length(r)) {
     setTxtProgressBar(pb = pb,value = i)
