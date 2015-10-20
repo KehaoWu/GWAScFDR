@@ -36,14 +36,13 @@ cFDR = function(p1,p2) {
   p_i1 = p_i[oj]; p_j1 = p_j[oj] #
   or = order(oj)[r] # index of snps in R in p_i1/p_j1
   cr = rep(0,length(r))
-  bp = txtProgressBar(min = 0,max = length(r))
-  cat("oj",oj,"\n")
+  pb = txtProgressBar(min = 0,max = length(r))
   
   for (i in 1:length(r)) {
+    setTxtProgressBar(pb = pb,value = i)
     cdf[r[i]] = length(which(p_i1[1:or[i]]<=p_i1[or[i]]))/or[i]
-    cat(cdf[r[i]],"\n")
   }
-  
+  cat("\n")
   # Equivalent technique
   
   #for (i in 1:length(r)) {
