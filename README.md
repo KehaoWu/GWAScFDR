@@ -10,13 +10,20 @@ devtools::install_github("KehaoWu/GWAScFDR")
 ## Demo
 
 ```R
-p1 = runif(10000,0,7)
-p2 = runif(10000,0,7)
-cFDR(p1,p2)   #Compute the 1st cFDR
-p = stratifiedQQForGenomeControlplot(p1)
-plot(p)
+p1 = runif(10000,0,1)
+p2 = runif(10000,0,1)
+cFDR(p1,p2)
 p = stratifiedQQplot(p1,p2)
 plot(p)
-p = stratifiedTDRplot(p1,p2)
+```
+
+```R
+pvalue = runif(100)
+bp = sample(10000:20000,100)
+chr = sample(1:22,100,replace=T)
+gene = as.character(1:100)
+p = manhattanPlot(pvalue = pvalue,bp = bp,chr = chr,gene = gene)
 plot(p)
 ```
+
+

@@ -57,15 +57,27 @@ stratifiedQQForGenomeControlplot = function(p){
   p
 }
 
-manhattanPlot = function(pvalue,bp,chr,ylab=expression(Conditional -log[10](FDR))){
+manhattanPlot = function(pvalue,bp,chr,gene=NULL,
+                         ylab=expression(-log[10](P)),
+                         cutoffline=T,
+                         chrLabel = 1:22){
+  if(grepl(pattern = "chr",x = chr[1])){
+    chr = as.numeric(gsub(pattern = "chr",replacement = "",x = chr))
+  }
+  bp = bp[pvalue!=0]
+  chr = chr[pvalue!=0]
+  pvalue = pvalue[pvalue!=0]
+  pvalue = pvalue[!is.na(chr)]
+  bp = bp[!is.na(chr)]
+  chr = chr[!is.na(chr)]
   pvalue = -log10(pvalue)
-  chrLabel = 1:22
+  pvalue = ifelse(pvalue<0,0,pvalue)
+  print(max(pvalue))
   bpMidVec <- vector(length=length(chrLabel))
   maxbp = 0
   bmin = vector(length=length(chrLabel))
   bmax = vector(length=length(chrLabel))
   for(i in chrLabel){
-    print(i)
     bp[chr==i] = bp[chr==i] + maxbp
     bmin[i] = min(bp[chr==i])
     bmax[i] = max(bp[chr==i])
@@ -73,8 +85,7 @@ manhattanPlot = function(pvalue,bp,chr,ylab=expression(Conditional -log[10](FDR)
     maxbp = max(bp[chr==i])
   }
   chr = factor(chr)
-  print(chrLabel)
-  print(bpMidVec)
+  yLabel = round(c(0,1,-log10(0.05),2:(max(pvalue)[1])),digits = 2)
   p = ggplot() + 
     geom_rect(data = data.frame(bmin,bmax,alpha=0.01),
               aes(xmin=bmin,xmax=bmax,alpha=alpha),
@@ -84,17 +95,29 @@ manhattanPlot = function(pvalue,bp,chr,ylab=expression(Conditional -log[10](FDR)
               size = 0
     ) + 
     geom_point(data = data.frame(P=pvalue,BP=bp,CHR=chr),aes(y=P,x=BP,colour=CHR),alpha=0.8) +
+    ylim(0,1.3*max(pvalue)) +
     scale_x_continuous(labels=as.character(chrLabel), breaks=bpMidVec) +
-    geom_hline(y=-log10(0.05), linetype=1, col='red', lwd=1) +
+    scale_y_continuous(labels=as.character(yLabel), breaks=yLabel) +
     scale_color_manual(values=rep(c('orange1', 'grey20'), 11)) +
     theme_bw() +
     theme(
       panel.grid=element_blank()
     ) +
-    ylim(0,1.1*max(pvalue)) +
     xlab("Chromosomal Location") +
     ylab(ylab) +
     theme(legend.position='none')
+  if (cutoffline){
+    p = p + geom_hline(y=-log10(0.05), linetype=1, col='red', lwd=1) 
+  }
+  if (!is.null(gene)){
+    
+    x = bp[pvalue>=-log10(0.05)]
+    gene = gene[pvalue>=-log10(0.05)]
+    y = pvalue[pvalue>=-log10(0.05)]
+    p = p + geom_text(data=data.frame(y=y,x=x,gene=gene),
+                      aes(y=y,x=x,label=gene),
+                      hjust=-0.5,
+                      angle=90)
+  }
   p
 }
-
