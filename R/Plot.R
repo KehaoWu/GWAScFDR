@@ -121,3 +121,18 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
   }
   p
 }
+
+cFDRDotPlot = function(p1,p2,cFDR){
+  x = -log10(p1)
+  y = -log10(p2)
+  z = -log10(unlist(lapply(cFDR,FUN = function(x)min(x,1))))
+  p = ggplot(data=data.frame(x,y,z)) +
+    geom_point(aes(x=x,y=y,color=z)) +
+    ylim(0,7) + 
+    xlim(0,7) +
+    scale_colour_gradientn(colours=c("white","yellow","orange","tomato","red"),
+                           values=rescale(c(0,1,2,4,max(z))), 
+                           space = "Lab")
+  plot(p)
+}
+
