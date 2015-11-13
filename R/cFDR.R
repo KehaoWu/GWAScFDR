@@ -54,9 +54,10 @@ cFDR = function(p1,p2) {
   return(f_i)
 }
 
-GenomicControl = function(p,intergenic){
+GenomicControl = function(p,pintergenic){
   z = qnorm(1 - p / 2)
-  lambda = median(z[intergenic] ^ 2 ) / 0.456
+  zintergenic = qnorm(1 - pintergenic / 2)
+  lambda = median(zintergenic ^ 2 ) / 0.456
   print(lambda)
   zad = sqrt(z^2/lambda)
   2 * pnorm(zad,lower.tail = F)
