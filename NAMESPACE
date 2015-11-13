@@ -6,3 +6,5 @@ export(stratifiedQQForGenomeControlplot)
 export(manhattanPlot)
 
 import(ggplot2) 
+import(methods)
+import(scales)
