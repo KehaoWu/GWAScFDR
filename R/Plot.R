@@ -66,10 +66,14 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
   }
   bp = bp[pvalue!=0]
   chr = chr[pvalue!=0]
+  gene = gene[pvalue!=0]
   pvalue = pvalue[pvalue!=0]
+  
   pvalue = pvalue[!is.na(chr)]
   bp = bp[!is.na(chr)]
+  gene = gene[!is.na(chr)]
   chr = chr[!is.na(chr)]
+  
   pvalue = -log10(pvalue)
   pvalue = ifelse(pvalue<0,0,pvalue)
   print(max(pvalue))
@@ -114,10 +118,10 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
   if (!is.null(gene)){
     
     x = bp[pvalue>=-log10(0.05)]
-    gene = gene[pvalue>=-log10(0.05)]
+    g = gene[pvalue>=-log10(0.05)]
     y = pvalue[pvalue>=-log10(0.05)]
     p = p + 
-      geom_text(data=data.frame(y=y,x=x,gene=gene),
+      geom_text(data=data.frame(y=y,x=x,gene=g),
                       aes(y=y,x=x,label=gene),
                       hjust=0) +
       geom_point(data=data.frame(y=y,x=x),
