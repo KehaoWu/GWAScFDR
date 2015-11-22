@@ -123,9 +123,7 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
     p = p + 
       geom_text(data=data.frame(y=y,x=x,gene=g),
                       aes(y=y,x=x,label=gene),
-                      hjust=0) +
-      geom_point(data=data.frame(y=y,x=x),
-                aes(y=y,x=x,size=2),colour="red")
+                      hjust=0)
   }
   p
 }
