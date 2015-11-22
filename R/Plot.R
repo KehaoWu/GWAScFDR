@@ -94,7 +94,9 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
               fill = rep(c("grey90","white"),11),
               size = 0
     ) + 
-    geom_point(data = data.frame(P=pvalue,BP=bp,CHR=chr),aes(y=P,x=BP,colour=CHR),alpha=0.8) +
+    geom_point(data = data.frame(P=pvalue,BP=bp,CHR=chr),
+               aes(y=P,x=BP,colour=CHR),
+               alpha=0.8) +
     ylim(0,1.3*max(pvalue)) +
     scale_x_continuous(labels=as.character(chrLabel), breaks=bpMidVec) +
     scale_y_continuous(labels=as.character(yLabel), breaks=yLabel) +
@@ -116,8 +118,7 @@ manhattanPlot = function(pvalue,bp,chr,gene=NULL,
     y = pvalue[pvalue>=-log10(0.05)]
     p = p + geom_text(data=data.frame(y=y,x=x,gene=gene),
                       aes(y=y,x=x,label=gene),
-                      hjust=-0.5,
-                      angle=90)
+                      hjust=-1)
   }
   p
 }
@@ -135,4 +136,30 @@ cFDRDotPlot = function(p1,p2,cFDR){
                            space = "Lab")
   plot(p)
 }
+
+QQplot = function(x,y = NULL){
+  fs = factor(y)
+  maxValue = xx = yy = NULL
+  x = -log10(x)
+  for(f in levels(fs)){
+    maxValue = c(max(x[fs==f]))
+    yyy = x[fs==f]
+    yy = c(yy,sort(yyy,decreasing = T))
+    xx = c(xx,-log10((1:sum(fs==f))/sum(fs==f)))
+  }
+  p = ggplot(data=data.frame(
+      x = xx, y = yy, SNPs = fs
+    )) +
+    geom_line(aes(x=x,y=y,colour=SNPs)) +
+    theme_bw() +
+    theme(
+      panel.grid=element_blank()
+    ) +
+    xlab(paste("Empirical",expression(-log10(q)))) +
+    ylab(paste("Nominal",expression(-log10(p)))) +
+    geom_abline(intercept = 0.8*min(maxValue),slope=0,linetype=2,colour="red")
+  p
+}
+
+
 

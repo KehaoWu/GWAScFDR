@@ -59,6 +59,8 @@ GenomicControl = function(p,pintergenic){
   zintergenic = qnorm(1 - pintergenic / 2)
   lambda = median(zintergenic ^ 2 ) / 0.456
   print(lambda)
-  zad = sqrt(z^2/lambda)
+  zad = z/sqrt(lambda)
   2 * pnorm(zad,lower.tail = F)
 }
+
+
